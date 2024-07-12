@@ -46,7 +46,7 @@ function void vim_default_bindings(Application_Links *app, Key_Code leader){
 	VimBind(N|MAP, vim_open_file_in_quotes,         SUB_G, KeyCode_F);
 	VimBind(N|MAP, vim_interactive_open_or_new,   (Ctl|Sft|KeyCode_O));
 	VimBind(N|MAP, quick_swap_buffer,             (Sft|Ctl|KeyCode_6));
-	VimBind(N|MAP, vim_goto_definition,               (Ctl|KeyCode_W));
+	//VimBind(N|MAP, vim_goto_definition,               (Ctl|KeyCode_W));
 	VimBind(N|MAP, vim_next_4coder_jump,              (Alt|KeyCode_N));
 	VimBind(N|MAP, vim_prev_4coder_jump,          (Sft|Alt|KeyCode_N));
 	VimBind(N|MAP, vim_first_4coder_jump,         (Sft|Alt|KeyCode_M));
@@ -112,7 +112,7 @@ function void vim_default_bindings(Application_Links *app, Key_Code leader){
 	VimBind(I|MAP,   vim_select_register,             (Ctl|KeyCode_R));
 	VimBind(I|MAP,   vim_delete_to_begin,             (Ctl|KeyCode_U));
 	VimBind(V|MAP,   vim_move_selection_up,           (Alt|KeyCode_K));
-	VimBind(V|MAP,   vim_move_selection_down,         (Alt|KeyCode_J));
+	//VimBind(V|MAP,   vim_move_selection_down,         (Alt|KeyCode_J));
 
 	/// Digit Binds
 	VimBind(N|V|MAP, vim_modal_0,                          KeyCode_0);
@@ -173,7 +173,7 @@ function void vim_default_bindings(Application_Links *app, Key_Code leader){
 	VimBind(N|MAP, vim_in_next_pattern,        SUB_G,      KeyCode_N);
 	VimBind(N|MAP, vim_in_prev_pattern,        SUB_G, (Sft|KeyCode_N));
 
-	VimBind(N|MAP, vim_prev_jump,                     (Ctl|KeyCode_O));
+	//VimBind(N|MAP, vim_prev_jump,                     (Ctl|KeyCode_O));
 	VimBind(N|MAP, vim_next_jump,                     (Ctl|KeyCode_I));
 	VimBind(N|MAP, vim_next_jump,                     (Sft|KeyCode_I));
 	//VimBind(N|MAP, vim_next_jump,                 (Ctl|Sft|KeyCode_I));
@@ -182,7 +182,7 @@ function void vim_default_bindings(Application_Links *app, Key_Code leader){
 	VimBind(N|V|MAP, vim_half_page_up,                (Ctl|KeyCode_U));
 	VimBind(N|V|MAP, vim_half_page_down,              (Ctl|KeyCode_D));
 	VimBind(N|V|MAP, vim_whole_page_up,               (Ctl|KeyCode_B));
-	VimBind(N|V|MAP, vim_whole_page_down,             (Ctl|KeyCode_F));
+	//VimBind(N|V|MAP, vim_whole_page_down,             (Ctl|KeyCode_F));
 	VimBind(N|V|MAP, vim_line_down,               (Ctl|Sft|KeyCode_Y));
 	VimBind(N|V|MAP, vim_line_down,                   (Ctl|KeyCode_Y));
 	VimBind(N|V|MAP, vim_line_up,                 (Ctl|Sft|KeyCode_E));
