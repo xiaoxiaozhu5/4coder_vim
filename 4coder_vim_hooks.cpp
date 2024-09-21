@@ -161,9 +161,7 @@ BUFFER_HOOK_SIG(vim_begin_buffer){
 	return 0;
 }
 
-#define exp_interp(cur, nxt, dt, rate) (cur += (((nxt) - (cur))*(1.f - pow_f32(rate, dt))))
-function f32 pow_f32(f32 x, f32 y){ return(powf(x, y)); }
-
+#define exp_interp(cur, nxt, dt, rate) (cur += (((nxt) - (cur))*(1.f - powf(rate, dt))))
 
 function void
 vim_animate_filebar(Application_Links *app, Frame_Info frame_info){
@@ -211,7 +209,7 @@ vim_tick(Application_Links *app, Frame_Info frame_info){
 	vim_animate_filebar(app, frame_info);
 	vim_animate_cursor(app, frame_info);
 #if VIM_DO_ANIMATE
-	vim_cursor_blink++;
+	vim_cursor_blink += frame_info.animation_dt;
 #endif
 
 	fold_tick(app, frame_info);

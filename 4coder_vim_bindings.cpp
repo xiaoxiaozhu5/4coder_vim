@@ -1,13 +1,18 @@
 
 // TODO(BYP): Might want meta-data on these, for now I prefer the simplicity
+function void vim_overwrite(Table_u64_u64 *table, u64 key, u64 val){
+	table_erase(table, key);
+	table_insert(table, key, val);
+}
+
 function void vim_map_set_binding(u32 mode, u32 sub_mode, void *func, u64 key){
 	if((mode & bitmask_3) == 0){
 		mode |= bitmask_3;
 		foreach(s,VIM_SUBMODE_COUNT){ vim_map_set_binding(mode, s, func, key); }
 	}
-	if(mode & bit_1){ table_insert(vim_maps + 0 + sub_mode*VIM_MODE_COUNT, key, PtrAsInt(func)); }
-	if(mode & bit_2){ table_insert(vim_maps + 1 + sub_mode*VIM_MODE_COUNT, key, PtrAsInt(func)); }
-	if(mode & bit_3){ table_insert(vim_maps + 2 + sub_mode*VIM_MODE_COUNT, key, PtrAsInt(func)); }
+	if(mode & bit_1){ vim_overwrite(vim_maps + 0 + sub_mode*VIM_MODE_COUNT, key, PtrAsInt(func)); }
+	if(mode & bit_2){ vim_overwrite(vim_maps + 1 + sub_mode*VIM_MODE_COUNT, key, PtrAsInt(func)); }
+	if(mode & bit_3){ vim_overwrite(vim_maps + 2 + sub_mode*VIM_MODE_COUNT, key, PtrAsInt(func)); }
 }
 function void VimBind(u32 mode, Custom_Command_Function *custom, Vim_Sub_Mode sub_mode, u64 key){
 	vim_map_set_binding(mode, sub_mode, (void *)custom, key);
@@ -54,6 +59,8 @@ function void vim_default_bindings(Application_Links *app, Key_Code leader){
 	VimBind(N|I|MAP, swap_panels,                     (Ctl|KeyCode_2));
 	VimBind(I|MAP, word_complete_drop_down,           (Ctl|KeyCode_N));
 	//VimBind(I|MAP, word_complete_drop_down,           (Ctl|KeyCode_P));
+	VimBind(N|I|MAP, vim_if_read_only_goto_position,                 KeyCode_Return);
+	VimBind(N|I|MAP, vim_if_read_only_goto_position_same_panel, (Sft|KeyCode_Return));
 
 	/// Mode Binds
 	VimBind(N|V|MAP, vim_modal_i,                          KeyCode_I);
@@ -163,20 +170,18 @@ function void vim_default_bindings(Application_Links *app, Key_Code leader){
 	VimBind(V|MAP,   cursor_mark_swap,                     KeyCode_O);
 	VimBind(V|MAP,   vim_block_swap,                  (Sft|KeyCode_O));
 
-	VimBind(N|MAP, vim_search_identifier,         (Ctl|Sft|KeyCode_8));
-	VimBind(N|MAP, vim_search_identifier,             (Sft|KeyCode_8));
-	VimBind(N|MAP, vim_clear_search,          SUB_Leader,  KeyCode_Space);
-	VimBind(N|MAP, vim_start_search_forward,               KeyCode_ForwardSlash);
-	VimBind(N|MAP, vim_start_search_backward,         (Sft|KeyCode_ForwardSlash));
-	VimBind(N|MAP, vim_to_next_pattern,                    KeyCode_N);
-	VimBind(N|MAP, vim_to_prev_pattern,               (Sft|KeyCode_N));
+	VimBind(N|V|MAP, vim_search_identifier,         (Ctl|Sft|KeyCode_8));
+	VimBind(N|V|MAP, vim_search_identifier,             (Sft|KeyCode_8));
+	VimBind(N|V|MAP, vim_clear_search,          SUB_Leader,  KeyCode_Space);
+	VimBind(N|V|MAP, vim_start_search_forward,               KeyCode_ForwardSlash);
+	VimBind(N|V|MAP, vim_start_search_backward,         (Sft|KeyCode_ForwardSlash));
+	VimBind(N|V|MAP, vim_to_next_pattern,                    KeyCode_N);
+	VimBind(N|V|MAP, vim_to_prev_pattern,               (Sft|KeyCode_N));
 	VimBind(N|MAP, vim_in_next_pattern,        SUB_G,      KeyCode_N);
 	VimBind(N|MAP, vim_in_prev_pattern,        SUB_G, (Sft|KeyCode_N));
 
 	//VimBind(N|MAP, vim_prev_jump,                     (Ctl|KeyCode_O));
 	VimBind(N|MAP, vim_next_jump,                     (Ctl|KeyCode_I));
-	VimBind(N|MAP, vim_next_jump,                     (Sft|KeyCode_I));
-	//VimBind(N|MAP, vim_next_jump,                 (Ctl|Sft|KeyCode_I));
 
 	/// Screen Adjust Binds
 	VimBind(N|V|MAP, vim_half_page_up,                (Ctl|KeyCode_U));
