@@ -367,28 +367,12 @@ vim_handle_input(Application_Links *app, Input_Event *event){
 		}else{
 			if(vim_state.mode != VIM_Insert){
 				String_ID map_id = vars_save_string_lit("keys_global");
-				String_ID file_map_id = vars_save_string_lit("keys_file");
-				String_ID code_map_id = vars_save_string_lit("keys_code");
 				Command_Binding command_binding = map_get_binding_non_recursive(&framework_mapping, map_id, event);
-				Command_Binding file_command_binding = map_get_binding_non_recursive(&framework_mapping, file_map_id, event);
-				Command_Binding code_command_binding = map_get_binding_non_recursive(&framework_mapping, code_map_id, event);
 				if(command_binding.custom){
 					vim_reset_state();
 					command_binding.custom(app);
 					vim_keystroke_text.size = 0;
-				}else if(file_command_binding.custom)
-				{
-					vim_reset_state();
-					file_command_binding.custom(app);
-					vim_keystroke_text.size = 0;
-				}else if(code_command_binding.custom)
-				{
-					vim_reset_state();
-					code_command_binding.custom(app);
-					vim_keystroke_text.size = 0;
-				}
-				else
-				{
+				}else{
 					vim_append_keycode(code);
 					vim_state.chord_resolved = bitmask_2;
 				}

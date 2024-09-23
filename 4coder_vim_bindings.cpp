@@ -180,14 +180,14 @@ function void vim_default_bindings(Application_Links *app, Key_Code leader){
 	VimBind(N|MAP, vim_in_next_pattern,        SUB_G,      KeyCode_N);
 	VimBind(N|MAP, vim_in_prev_pattern,        SUB_G, (Sft|KeyCode_N));
 
-	//VimBind(N|MAP, vim_prev_jump,                     (Ctl|KeyCode_O));
+	VimBind(N|MAP, vim_prev_jump,                     (Ctl|KeyCode_O));
 	VimBind(N|MAP, vim_next_jump,                     (Ctl|KeyCode_I));
 
 	/// Screen Adjust Binds
 	VimBind(N|V|MAP, vim_half_page_up,                (Ctl|KeyCode_U));
 	VimBind(N|V|MAP, vim_half_page_down,              (Ctl|KeyCode_D));
 	VimBind(N|V|MAP, vim_whole_page_up,               (Ctl|KeyCode_B));
-	//VimBind(N|V|MAP, vim_whole_page_down,             (Ctl|KeyCode_F));
+	VimBind(N|V|MAP, vim_whole_page_down,             (Ctl|KeyCode_F));
 	VimBind(N|V|MAP, vim_line_down,               (Ctl|Sft|KeyCode_Y));
 	VimBind(N|V|MAP, vim_line_down,                   (Ctl|KeyCode_Y));
 	VimBind(N|V|MAP, vim_line_up,                 (Ctl|Sft|KeyCode_E));
