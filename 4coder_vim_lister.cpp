@@ -563,7 +563,7 @@ vim_run_lister(Application_Links *app, Lister *lister){
 
 	ret = lister->out;
 #else
-	ret = default_run_lister(app, lister);
+	ret = run_lister(app, lister);
 #endif
 	vim_lister_view_id = 0;
 	return ret;

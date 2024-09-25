@@ -3,6 +3,7 @@
 
 #include "4coder_vimrc.h"
 #include "4coder_vim_include.h"
+#include "4coder_vim_include.cpp"
 
 #if !defined(META_PASS)
 #include "generated/managed_id_metadata.cpp"
