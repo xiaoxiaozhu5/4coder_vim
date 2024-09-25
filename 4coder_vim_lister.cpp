@@ -372,6 +372,7 @@ vim_run_lister(Application_Links *app, Lister *lister){
 	Lister_Result ret;
 	View_ID view = get_this_ctx_view(app, Access_Always);
 	vim_lister_view_id = view;
+#if VIM_USE_BOTTOM_LISTER
 	Scratch_Block scratch(app);
 	lister->filter_restore_point = begin_temp(lister->arena);
 	lister_update_filtered_list(app, lister);
@@ -561,6 +562,9 @@ vim_run_lister(Application_Links *app, Lister *lister){
 	}
 
 	ret = lister->out;
+#else
+	ret = default_run_lister(app, lister);
+#endif
 	vim_lister_view_id = 0;
 	return ret;
 }
